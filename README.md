@@ -10,6 +10,12 @@ PHP, Slim, Mysql, React
 ## How to run
 1. docker compose up -d --build
 2. cd frontend && npm install && npm run start
+
+To run locally:
+1. composer install
+2. run xampp sql, apache
+2. php -S localhost -t public
+
 ### Couple of notes:
 1. Cron tabs does not seem to work, I couldn't make them run in docker, I tried to ask you if I can use supercronic which would probably work, but you said go with cron. Cron's tasks/jobs are ready to go, just need a good package.
    2. Every requested automated task has its own script that can run INDEPENDENTLY, it just need to a proper scheduler that will work. 

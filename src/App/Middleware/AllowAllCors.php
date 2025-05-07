@@ -16,6 +16,10 @@ class AllowAllCors implements MiddlewareInterface
         //DISABLE THIS MIDDLEWARE IN PRODUCTION!
         $response = $handler->handle($request);
 
-        return $response->withHeader('Content-Type', 'application/json');
+        return $response
+            ->withHeader('Access-Control-Allow-Origin', '*') // Replace '*' with your frontend's URL
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+            ->withHeader('Access-Control-Allow-Credentials', 'true'); // If credentials are needed
     }
 }

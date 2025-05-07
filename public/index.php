@@ -67,7 +67,7 @@ $app->group("/api", function (RouteCollectorProxy $api) {
     $api->get('/logs', [\App\Controllers\LogController::class, 'show']);
 
 })
-    ->addMiddleware(new AllowAllCors)
+    ->add(AllowAllCors::class)
     ->addMiddleware(new AddJsonResponseHeader);
 
 $app->run();

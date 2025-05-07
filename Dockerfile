@@ -28,6 +28,6 @@ COPY . .
 # Install PHP dependencies
 RUN if [ -f composer.json ]; then composer install --no-dev --optimize-autoloader; fi
 
-RUN if [ -f cron/jobs ]; then chmod 0644 cron/jobs && crontab cron/jobs; fi
+# RUN if [ -f cron/jobs ]; then chmod 0644 cron/jobs && crontab cron/jobs; fi
 
 CMD service cron start && apache2-foreground
