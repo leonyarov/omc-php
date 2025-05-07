@@ -1,0 +1,12 @@
+# Run the "add_sensor" job once per day at midnight
+# 0 0 * * *  php /var/www/html/src/App/Jobs/add_sensor.php
+
+# Run the "aggregate_data" job every hour
+0 * * * *  php /var/www/html/src/App/Jobs/AggregateData.php
+
+# Run the "deviation_sensor_check"  5 minutes after aggregation
+5 * * * *  php /var/www/html/src/App/Jobs/CheckSensorDeviationJob.php
+5 * * * *  php /var/www/html/src/App/Jobs/CheckSensorStatus.php
+
+# Run the "send_sensor_data" job every second (loop inside bash)
+* * * * *  bash -c 'for i in {1..60}; do php /var/www/html/src/App/Jobs/ReportSensorData.php; sleep 1; done'

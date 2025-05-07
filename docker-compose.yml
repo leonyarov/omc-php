@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=atower
+      - MYSQL_USER=php
+      - MYSQL_PASSWORD=password
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./db:/docker-entrypoint-initdb.d"
+
+  www:
+    build: .
+    container_name: slim-app
+    env_file:
+      - .env
+    volumes:
+      - "./:/var/www/html"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:80"
+    depends_on:
+      - db
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8001:80"
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
